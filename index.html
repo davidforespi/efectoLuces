@@ -1,41 +1,77 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Auto Fantástico</title>
     <style>
         body {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: grey;
+            ;
         }
 
-        #auto {
-            width: 400px;
-            height: 200px;
-            background-color: white;
-            position: relative;
+        #cuadricula {
             display: flex;
             justify-content: center;
-            align-items: center;
         }
 
-        .light {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
+        .cuadro {
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
             display: inline-block;
-            margin: 10px;
-            background-color: grey;
+            background-color: white;
+        }
+
+        .rojo {
+            background-color: red;
         }
     </style>
 </head>
+
 <body>
-    <div id="auto">
-        <!-- Agrega las luces del auto -->
+    <h1>Carro Fantástico</h1>
+    <div id="cuadricula">
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
+        <div class="cuadro"></div>
     </div>
 
-    <script src="auto.js"></script>
+    <script>
+        const cuadros = document.querySelectorAll('.cuadro');
+        let desplazamiento = 128;
+        let direccion = 1;
+
+        function animarCuadros() {
+
+            if (direccion === 1) {
+                for (let i = 0; i < cuadros.length; i++) {
+                    cuadros[i].classList.toggle('rojo', (desplazamiento & (1 << i)));
+                    console.log(desplazamiento);
+                }
+
+                desplazamiento = desplazamiento >> direccion;
+
+                if (desplazamiento === 0) {
+                    desplazamiento = 128;
+                }
+            
+            }
+        }
+
+
+        setInterval(animarCuadros, 300);
+    </script>
 </body>
+
 </html>
